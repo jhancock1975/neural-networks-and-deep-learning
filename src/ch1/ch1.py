@@ -10,7 +10,7 @@ class Network(object):
                     for x,y, in zip(sizes[:-1], sizes[1:])]
 
   def feedforward(self,a):
-  """return the outupt of a network if "a" is input"""
+    """return the outupt of a network if "a" is input"""
     for b, w, in zip(self.biases, self.weights):
       a = sigmoid(np.dot(w,a)+b)
     return a
@@ -21,22 +21,22 @@ class Network(object):
  
     n=len(training_data)
  
-   for j in xrange(epochs):
+    for j in xrange(epochs):
 
-    random.shuffle(training_data)
+      random.shuffle(training_data)
 
-    mini_batches = [
-      training_data[k:k+mini_batch_size]
-        for k in xrange(0, n, mini_batch_size)]
+      mini_batches = [
+        training_data[k:k+mini_batch_size]
+          for k in xrange(0, n, mini_batch_size)]
 
-    for mini_batch in mini_batches:
-      self.update_mini_batch(mini_batch, eta)
+      for mini_batch in mini_batches:
+        self.update_mini_batch(mini_batch, eta)
 
-    if test_data:
-      print "Epoch{0}: {1} / {2}".format(
-        j, self.evaluate(test_data), n_test)
-    else:
-      print "Epoch {0} complete".format(j)
+      if test_data:
+        print ("Epoch{0}: {1} / {2}" . format(
+          j, self.evaluate(test_data), n_test))
+      else:
+        print ("Epoch {0} complete" . format(j))
 
   def update_mini_batch(self, mini_batch, eta):
 
@@ -76,7 +76,7 @@ class Network(object):
 
       activations.append(activation)
 
-    delta = self.cost_derivative(activaions[-1], y) * sigmoid_prime(zs[-1]
+    delta = self.cost_derivative(activaions[-1], y) * sigmoid_prime(zs[-1])
 
     nabla_b[-1] = delta
 
@@ -92,12 +92,12 @@ class Network(object):
 
     return(nabla_b, nabla_w)
 
-    def evaluate(self, test_data):
-      test_results = [np.argmax(self.feedforward(x)), y)
-                      for(x, y) in test_data]
-      return sum(int(x==y) for (x,y) in test_results)
+  def evaluate(self, test_data):
+    test_results = [(np.argmax(self.feedforward(x)), y)
+                    for (x, y) in test_data]
+    return sum(int(x==y) for (x,y) in test_results)
 
-    def cost_derivative(self, output_activations, y):
+  def cost_derivative(self, output_activations, y):
 
       return output_activations - y 
 def sigmoid(z):
