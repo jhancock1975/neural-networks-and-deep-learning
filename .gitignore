@@ -9,3 +9,5 @@ src/ec2
 # ignore eclipse files
 .project
 .pydevproject
+# ignore vi swp files
+*.swp
